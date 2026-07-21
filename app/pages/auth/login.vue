@@ -1,0 +1,247 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+import {
+  Eye,
+  EyeOff,
+  Lock,
+  Mail,
+  ShieldCheck,
+  Loader2,
+  AlertCircle,
+  Wallet,
+  ArrowRight,
+  TrendingUp,
+  Receipt,
+  CheckCircle2
+} from 'lucide-vue-next'
+
+definePageMeta({ layout: false })
+
+const { login, loading, errorMsg } = useAuth()
+
+const email = ref('')
+const password = ref('')
+const showPassword = ref(false)
+const rememberMe = ref(false)
+
+async function handleSubmit() {
+  if (!email.value || !password.value) return
+  await login(email.value, password.value)
+}
+</script>
+
+<template>
+  <div class="min-h-screen w-full flex bg-background text-foreground selection:bg-primary selection:text-primary-foreground">
+    <!-- Left Hero Banner Section (Visible on large screens) -->
+    <div class="hidden lg:flex flex-col justify-between w-1/2 xl:w-7/12 relative bg-slate-950 text-slate-100 p-12 overflow-hidden border-r border-slate-800">
+      <!-- Ambient Background Elements -->
+      <div class="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.25),rgba(255,255,255,0))]"></div>
+      <div class="absolute inset-0 bg-[linear-gradient(to_right,#1f2937_1px,transparent_1px),linear-gradient(to_bottom,#1f2937_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-20"></div>
+
+      <!-- Top Branding -->
+      <div class="relative z-10 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="h-11 w-11 rounded-xl bg-gradient-to-br from-indigo-500 via-primary to-slate-800 p-0.5 shadow-lg shadow-indigo-500/20">
+            <div class="h-full w-full bg-slate-950 rounded-[10px] flex items-center justify-center">
+              <Wallet class="h-5.5 w-5.5 text-indigo-400" />
+            </div>
+          </div>
+          <div>
+            <span class="font-semibold text-lg tracking-tight text-white block">Pautang List</span>
+            <span class="text-xs text-slate-400 font-medium">Ledger & Debt Management</span>
+          </div>
+        </div>
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 backdrop-blur-md">
+          <ShieldCheck class="w-3.5 h-3.5" />
+          <span>Secure Portal</span>
+        </div>
+      </div>
+
+      <!-- Middle Feature Spotlight -->
+      <div class="relative z-10 max-w-lg my-auto py-12 space-y-8">
+        <div class="space-y-4">
+          <div class="inline-flex items-center gap-2 text-indigo-400 font-medium text-sm">
+            <TrendingUp class="w-4 h-4" />
+            <span>Smart Credit Tracking</span>
+          </div>
+          <h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl text-white leading-tight">
+            Effortless debt & payment management.
+          </h1>
+          <p class="text-base text-slate-300 leading-relaxed">
+            Monitor balances, record customer transactions, and stay on top of collectibles with precision and complete data privacy.
+          </p>
+        </div>
+
+        <!-- Classic Feature Cards Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 backdrop-blur-sm space-y-2">
+            <div class="h-8 w-8 rounded-lg bg-indigo-500/10 text-indigo-400 flex items-center justify-center">
+              <Receipt class="w-4 h-4" />
+            </div>
+            <h3 class="font-semibold text-sm text-slate-200">Real-time Ledger</h3>
+            <p class="text-xs text-slate-400 leading-normal">
+              Instant balance calculations and transaction summaries.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 backdrop-blur-sm space-y-2">
+            <div class="h-8 w-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
+              <CheckCircle2 class="w-4 h-4" />
+            </div>
+            <h3 class="font-semibold text-sm text-slate-200">Payment Tracking</h3>
+            <p class="text-xs text-slate-400 leading-normal">
+              Effortlessly track paid vs unpaid balances anytime.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Quote / Footer -->
+      <div class="relative z-10 pt-6 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
+        <p>© {{ new Date().getFullYear() }} Pautang List. All rights reserved.</p>
+        <div class="flex items-center gap-4 text-slate-400">
+          <span class="hover:text-slate-300 cursor-pointer transition-colors">Privacy</span>
+          <span>•</span>
+          <span class="hover:text-slate-300 cursor-pointer transition-colors">Terms</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Login Card Section -->
+    <div class="flex-1 flex flex-col justify-center items-center p-6 sm:p-12 md:p-16 bg-muted/20 relative">
+      <!-- Subtle Background Pattern for Form Side -->
+      <div class="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] dark:bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:24px_24px] opacity-40 pointer-events-none"></div>
+
+      <div class="w-full max-w-md space-y-6 relative z-10">
+        <!-- Mobile Logo Header (Hidden on large screens) -->
+        <div class="flex lg:hidden items-center justify-center gap-3 mb-6">
+          <div class="h-10 w-10 rounded-xl bg-slate-900 text-white flex items-center justify-center shadow-md">
+            <Wallet class="h-5 w-5 text-indigo-400" />
+          </div>
+          <div class="text-left">
+            <h2 class="font-bold text-lg leading-none">Pautang List</h2>
+            <span class="text-xs text-muted-foreground">Ledger System</span>
+          </div>
+        </div>
+
+        <!-- Main Shadcn Authentication Card -->
+        <Card class="border-border/80 shadow-xl shadow-slate-950/5 dark:shadow-black/40 backdrop-blur-md bg-card/95 transition-all">
+          <CardHeader class="space-y-1.5 pb-6">
+            <div class="flex items-center justify-between">
+              <CardTitle class="text-2xl font-bold tracking-tight">Sign In</CardTitle>
+              <span class="text-xs font-medium px-2.5 py-1 rounded-md bg-secondary text-secondary-foreground">Account</span>
+            </div>
+            <CardDescription class="text-sm text-muted-foreground">
+              Enter your registered credentials to access your ledger dashboard.
+            </CardDescription>
+          </CardHeader>
+
+          <CardContent class="space-y-4">
+            <form @submit.prevent="handleSubmit" class="space-y-4">
+              <!-- Email Field -->
+              <div class="space-y-2">
+                <Label for="email" class="text-xs font-semibold text-foreground">Email Address</Label>
+                <div class="relative">
+                  <Mail class="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+                  <Input
+                    id="email"
+                    v-model="email"
+                    type="email"
+                    required
+                    placeholder="name@example.com"
+                    class="pl-10 h-10 transition-colors focus-visible:ring-2"
+                  />
+                </div>
+              </div>
+
+              <!-- Password Field -->
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <Label for="password" class="text-xs font-semibold text-foreground">Password</Label>
+                  <a href="#" @click.prevent class="text-xs text-primary font-medium hover:underline focus:outline-none focus:ring-1 focus:ring-ring rounded">
+                    Forgot password?
+                  </a>
+                </div>
+                <div class="relative">
+                  <Lock class="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+                  <Input
+                    id="password"
+                    v-model="password"
+                    :type="showPassword ? 'text' : 'password'"
+                    required
+                    placeholder="••••••••"
+                    class="pl-10 pr-10 h-10 transition-colors focus-visible:ring-2"
+                  />
+                  <button
+                    type="button"
+                    class="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors p-1 rounded-md focus:outline-none"
+                    @click="showPassword = !showPassword"
+                    :title="showPassword ? 'Hide password' : 'Show password'"
+                  >
+                    <Eye v-if="!showPassword" class="h-4 w-4" />
+                    <EyeOff v-else class="h-4 w-4" />
+                  </button>
+                </div>
+              </div>
+
+              <!-- Remember Me Checkbox -->
+              <div class="flex items-center justify-between pt-1">
+                <label class="flex items-center gap-2 text-xs font-medium text-muted-foreground cursor-pointer select-none">
+                  <input
+                    type="checkbox"
+                    v-model="rememberMe"
+                    class="h-4 w-4 rounded border-input text-primary focus:ring-ring focus:ring-2 focus:ring-offset-2 transition-all accent-primary cursor-pointer"
+                  />
+                  <span>Remember me on this device</span>
+                </label>
+              </div>
+
+              <!-- Animated Error Message Banner -->
+              <Transition
+                enter-active-class="transition duration-200 ease-out"
+                enter-from-class="transform -translate-y-2 opacity-0"
+                enter-to-class="transform translate-y-0 opacity-100"
+                leave-active-class="transition duration-150 ease-in"
+                leave-from-class="transform translate-y-0 opacity-100"
+                leave-to-class="transform -translate-y-2 opacity-0"
+              >
+                <div
+                  v-if="errorMsg"
+                  class="flex items-start gap-3 p-3.5 rounded-lg bg-destructive/10 border border-destructive/20 text-destructive text-xs leading-relaxed"
+                  role="alert"
+                >
+                  <AlertCircle class="h-4 w-4 shrink-0 mt-0.5" />
+                  <div class="flex-1 font-medium">{{ errorMsg }}</div>
+                </div>
+              </Transition>
+
+              <!-- Submit Button -->
+              <Button
+                type="submit"
+                :disabled="loading"
+                size="lg"
+                class="w-full h-11 font-medium text-sm transition-all duration-200 shadow-md hover:shadow-lg disabled:opacity-50 cursor-pointer group mt-2"
+              >
+                <template v-if="loading">
+                  <Loader2 class="h-4 w-4 animate-spin mr-2" />
+                  <span>Authenticating...</span>
+                </template>
+                <template v-else>
+                  <span>Sign In</span>
+                  <ArrowRight class="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                </template>
+              </Button>
+            </form>
+          </CardContent>
+
+          <CardFooter class="flex flex-col space-y-4 pt-2 border-t border-border/40">
+            <div class="flex items-center justify-center w-full gap-2 text-xs text-muted-foreground">
+              <ShieldCheck class="w-3.5 h-3.5 text-emerald-500" />
+              <span>Protected by 256-bit encrypted connection</span>
+            </div>
+          </CardFooter>
+        </Card>
+      </div>
+    </div>
+  </div>
+</template>
