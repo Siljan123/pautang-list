@@ -53,6 +53,9 @@ export default defineNuxtConfig({
       supabasePublishableKey: process.env.SUPABASE_PUBLISHABLE_KEY,
     },
   },
+   nitro: {
+    preset: 'cloudflare-pages'
+  },
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true }
 })
