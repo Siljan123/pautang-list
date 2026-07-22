@@ -3,7 +3,7 @@ import { useSupabaseClient, useSupabaseUser } from '#imports'
 
 
 export type TransactionRow = Database['public']['Tables']['utang_transactions']['Row'] & {
-  customer: { name: string } | null
+  customer: { name: string; contact_number?: string | null; address?: string | null } | null
 }
 
 export function useTransactions() {
@@ -16,7 +16,7 @@ export function useTransactions() {
     loading.value = true
     let query = supabase
       .from('utang_transactions')
-      .select('*, customer:customers(name)')
+      .select('*, customer:customers(name, contact_number, address)')
       .order('created_at', { ascending: false })
 
     if (user.value?.id) {

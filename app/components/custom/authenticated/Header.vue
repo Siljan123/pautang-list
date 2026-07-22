@@ -121,14 +121,14 @@ function markAllAsRead() {
             </p>
           </div>
 
-          <button class="flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-xs font-medium text-popover-foreground hover:bg-accent transition-colors">
-            <User class="h-4 w-4 text-muted-foreground" />
-            Profile & Account
-          </button>
-          <button class="flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-xs font-medium text-popover-foreground hover:bg-accent transition-colors">
-            <Wallet class="h-4 w-4 text-muted-foreground" />
+          <NuxtLink
+            to="/authenticated/settings"
+            @click="showUserMenu = false"
+            class="flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-xs font-medium text-popover-foreground hover:bg-accent transition-colors"
+          >
+            <Settings class="h-4 w-4 text-muted-foreground" />
             Pautang Settings
-          </button>
+          </NuxtLink>
 
           <div class="my-1 border-t border-border" />
 

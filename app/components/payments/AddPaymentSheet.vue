@@ -172,7 +172,7 @@ const handleSubmit = async () => {
 <template>
   <Sheet :open="open" @update:open="onOpenChange">
     <SheetTrigger as-child>
-      <Button size="sm" class="bg-emerald-600 hover:bg-emerald-700 text-white font-medium gap-1.5 px-3.5 h-9 rounded-lg shadow-2xs transition-colors">
+      <Button size="sm" class="text-white font-medium gap-1.5 px-3.5 h-9 rounded-lg shadow-2xs transition-colors">
         <Plus class="h-4 w-4" />
         Record Payment
       </Button>
@@ -181,7 +181,7 @@ const handleSubmit = async () => {
     <SheetContent class="flex flex-col overflow-y-auto justify-center max-w-md">
       <SheetHeader class="w-full items-center justify-center border-b pb-3">
         <SheetTitle class="flex items-center gap-2">
-          <CheckCircle2 class="h-5 w-5 text-emerald-600" />
+          <CheckCircle2 class="h-5 w-5" />
           Record Customer Payment
         </SheetTitle>
       </SheetHeader>
@@ -258,7 +258,7 @@ const handleSubmit = async () => {
             </span>
           </div>
 
-          <Select v-model="selectedTransactionId" @update:model-value="onSelectTransaction">
+          <Select v-model="selectedTransactionId" @update:model-value?="onSelectTransaction">
             <SelectTrigger id="tx-history" class="w-full text-xs">
               <SelectValue placeholder="-- Pick a transaction to auto-fill & mark paid --" />
             </SelectTrigger>

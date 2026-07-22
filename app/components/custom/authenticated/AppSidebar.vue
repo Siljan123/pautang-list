@@ -39,10 +39,16 @@ const mainItems = computed( () => [
     url: '/authenticated/dashboard',
     icon: LayoutDashboard,
   },
+   {
+    title: 'Customers',
+    url: '/authenticated/customers',
+    icon: Users,
+    badge: transactionCount.value > 0 ? String (transactionCount.value) : undefined
+  },
   {
     title: 'Transaction List',
     url: '/authenticated/transactionList',
-    icon: Users,
+    icon: Receipt,
     badge: transactionCount.value > 0 ? String (transactionCount.value) : undefined
   },
   {
@@ -52,21 +58,16 @@ const mainItems = computed( () => [
   },
   {
     title: 'Due Dates',
-    url: '#',
+    url: '/authenticated/dueDates',
     icon: Calendar,
   },
 ])
 
 const systemItems = [
   {
-    title: 'Settings',
-    url: '#',
+    title: 'Appearance & Settings',
+    url: '/authenticated/settings',
     icon: Settings,
-  },
-  {
-    title: 'Help & Support',
-    url: '#',
-    icon: HelpCircle,
   },
 ]
 </script>

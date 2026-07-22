@@ -72,12 +72,6 @@ function formatDate(dateStr: string | null) {
           Here is what's happening with your loan receivables and transaction history.
         </p>
       </div>
-
-      <div class="flex items-center gap-2">
-        <span class="text-xs text-muted-foreground bg-muted px-3 py-1.5 rounded-lg border border-border">
-          Live Supabase Sync
-        </span>
-      </div>
     </div>
 
     <!-- Live Stats Grid -->

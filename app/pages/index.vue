@@ -1,13 +1,4 @@
 <script setup lang="ts">
-import LandingHero from '~/components/landing/Hero.vue'
-import LandingShowcase from '~/components/landing/Showcase.vue'
-import LandingCalculator from '~/components/landing/Calculator.vue'
-import LandingFeatures from '~/components/landing/Features.vue'
-import LandingHowItWorks from '~/components/landing/HowItWorks.vue'
-import LandingFaq from '~/components/landing/Faq.vue'
-import LandingCta from '~/components/landing/Cta.vue'
-import LandingFooter from '~/components/landing/Footer.vue'
-
 definePageMeta({
   layout: 'landing'
 })
@@ -20,7 +11,6 @@ definePageMeta({
 
     <LandingHero />
     <LandingShowcase />
-    <LandingCalculator />
     <LandingFeatures />
     <LandingHowItWorks />
     <LandingFaq />

@@ -20,7 +20,6 @@ const mobileMenuOpen = ref(false)
             <span class="font-bold text-lg tracking-tight text-foreground flex items-center gap-1.5">
               Pautang <span class="text-emerald-600 dark:text-emerald-400">List</span>
             </span>
-            <span class="text-[10px] text-muted-foreground -mt-1 font-medium hidden sm:inline-block">Debt & Credit Tracker</span>
           </div>
         </NuxtLink>
 

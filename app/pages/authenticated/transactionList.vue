@@ -15,7 +15,6 @@ const refreshKey = ref(0)
       </div>
       <TransactionsAddTransactionSheet @success="refreshKey++" />
     </div>
-
     <!-- Table Component -->
     <TransactionsTransactionTable :key="refreshKey" />
   </div>

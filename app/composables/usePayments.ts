@@ -1,7 +1,5 @@
 // composables/usePayments.ts
 import { useSupabaseClient, useSupabaseUser } from '#imports'
-import type { Database } from '~/shared/types/database.types'
-
 export type PaymentRow = Database['public']['Tables']['payments']['Row'] & {
   customer: { name: string } | null
 }

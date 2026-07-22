@@ -15,7 +15,7 @@ onMounted(() => {
 })
 
 const totalCollected = computed(() => {
-  return payments.value.reduce((sum, p) => sum + Number(p.amount_paid || 0), 0)
+  return payments.value.reduce((sum:number, p: PaymentRow) => sum + Number(p.amount_paid || 0), 0)
 })
 
 function formatCurrency(amount: number) {
