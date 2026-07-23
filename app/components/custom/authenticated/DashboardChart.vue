@@ -98,11 +98,11 @@ const points = computed(() => {
 const collectedAreaPath = computed(() => {
   if (!points.value.length) return ''
   const pts = points.value
-  let d = `M ${pts[0].x} ${pts[0].yCollected}`
+  let d = `M ${pts[0]!.x} ${pts[0]!.yCollected}`
   for (let i = 1; i < pts.length; i++) {
-    d += ` L ${pts[i].x} ${pts[i].yCollected}`
+    d += ` L ${pts[i]!.x} ${pts[i]!.yCollected}`
   }
-  d += ` L ${pts[pts.length - 1].x} ${height - paddingY} L ${pts[0].x} ${height - paddingY} Z`
+  d += ` L ${pts[pts.length - 1]!.x} ${height - paddingY} L ${pts[0]!.x} ${height - paddingY} Z`
   return d
 })
 
@@ -110,11 +110,11 @@ const collectedAreaPath = computed(() => {
 const unpaidAreaPath = computed(() => {
   if (!points.value.length) return ''
   const pts = points.value
-  let d = `M ${pts[0].x} ${pts[0].yUnpaid}`
+  let d = `M ${pts[0]!.x} ${pts[0]!.yUnpaid}`
   for (let i = 1; i < pts.length; i++) {
     d += ` L ${pts[i].x} ${pts[i].yUnpaid}`
   }
-  d += ` L ${pts[pts.length - 1].x} ${height - paddingY} L ${pts[0].x} ${height - paddingY} Z`
+  d += ` L ${pts[pts.length - 1]!.x} ${height - paddingY} L ${pts[0]!.x} ${height - paddingY} Z`
   return d
 })
 

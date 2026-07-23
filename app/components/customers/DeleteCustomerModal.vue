@@ -58,7 +58,7 @@ async function handleDelete() {
 
 <template>
   <Sheet :open="open" @update:open="(val) => emit('update:open', val)">
-    <SheetContent class="flex flex-col max-w-md overflow-y-auto">
+    <SheetContent class="flex flex-col max-w-md overflow-y-auto p-4">
       <SheetHeader class="border-b border-border pb-3">
         <SheetTitle class="flex items-center gap-2 text-rose-600 dark:text-rose-400 text-lg">
           <AlertTriangle class="h-5 w-5 shrink-0" />
