@@ -37,14 +37,6 @@ import {
         <span>Start Tracking Now</span>
         <ArrowRight class="h-5 w-5 group-hover:translate-x-1 transition-transform" />
       </NuxtLink>
-
-      <a
-        href="#calculator"
-        class="w-full sm:w-auto px-8 py-4 rounded-xl border border-border bg-card/60 hover:bg-muted/80 font-semibold text-base text-foreground transition-all hover:-translate-y-0.5 flex items-center justify-center gap-2"
-      >
-        <Calculator class="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
-        <span>Try Balance Calculator</span>
-      </a>
     </div>
 
     <!-- Trust Badges -->

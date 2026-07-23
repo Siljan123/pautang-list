@@ -33,12 +33,10 @@ async function handleSubmit() {
 <template>
         <Card class="shadow-xl shadow-slate-950/10 dark:shadow-black/40 backdrop-blur-md bg-card/95 transition-all">
           <CardHeader class="space-y-1.5 pb-6">
-            <div class="flex items-center justify-between">
-              <CardTitle class="text-2xl font-bold tracking-tight">Sign In</CardTitle>
+            <div class="flex mx-auto items-center justify-between py-4">
+              <CardTitle class="text-2xl text-center font-bold tracking-tight">Sign In</CardTitle>
             </div>
-            <CardDescription class="text-sm text-muted-foreground">
-              Enter your registered credentials to access your ledger dashboard.
-            </CardDescription>
+            
           </CardHeader>
 
           <CardContent class="space-y-4">
