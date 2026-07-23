@@ -52,19 +52,30 @@ const filteredCustomers = computed(() => {
   return customers.value.filter(c => c.name.toLowerCase().includes(q))
 })
 
-const selectedCustomerName = computed(() => {
+const selectedCustomerBalance = computed(() => {
+  if (!form.value.customer_id) return 0
   const c = customers.value.find(item => item.id === form.value.customer_id)
-  return c ? c.name : ''
+  if (c && c.balance !== undefined && c.balance > 0) return c.balance
+  return customerUnpaidTransactions.value.reduce((sum, t) => sum + Number(t.total_amount || 0), 0)
+})
+
+const displayedOwedAmount = computed(() => {
+  if (selectedTransactionId.value) {
+    const tx = customerUnpaidTransactions.value.find(t => t.id === selectedTransactionId.value)
+    if (tx) return tx.total_amount
+  }
+  return selectedCustomerBalance.value
 })
 
 // Unpaid transactions for the selected customer
 const customerUnpaidTransactions = ref<TransactionRow[]>([])
 
-// Watch customer selection to load their unpaid transactions
-watch(() => form.value.customer_id, (newCustomerId) => {
+// Auto-fill customer balance or unpaid transaction amount into form.amount_paid
+const autoFillCustomerBalance = (newCustomerId: string) => {
   selectedTransactionId.value = ''
   if (!newCustomerId) {
     customerUnpaidTransactions.value = []
+    form.value.amount_paid = ''
     return
   }
 
@@ -72,6 +83,43 @@ watch(() => form.value.customer_id, (newCustomerId) => {
   customerUnpaidTransactions.value = transactions.value.filter(
     t => t.customer_id === newCustomerId && !t.is_paid
   )
+
+  const selectedCust = customers.value.find(c => c.id === newCustomerId)
+  const custBalance = Number(selectedCust?.balance || 0)
+  const unpaidSum = customerUnpaidTransactions.value.reduce(
+    (sum, t) => sum + Number(t.total_amount || 0),
+    0
+  )
+
+  if (customerUnpaidTransactions.value.length === 1 && customerUnpaidTransactions.value[0]) {
+    // If exactly 1 unpaid transaction exists, auto-select it (which sets amount, note, and date)
+    onSelectTransaction(customerUnpaidTransactions.value[0].id)
+  } else if (custBalance > 0) {
+    form.value.amount_paid = String(custBalance)
+  } else if (unpaidSum > 0) {
+    form.value.amount_paid = String(unpaidSum)
+  } else {
+    form.value.amount_paid = ''
+  }
+}
+
+// Watch customer selection to load their unpaid transactions and auto-fill amount
+watch(() => form.value.customer_id, (newCustomerId) => {
+  autoFillCustomerBalance(newCustomerId)
+})
+
+// Watch selected transaction ID so that selecting an unpaid item always updates amount paid accurately
+watch(selectedTransactionId, (newTxId) => {
+  if (!newTxId || newTxId === 'none') return
+  const foundTx = customerUnpaidTransactions.value.find(t => t.id === newTxId)
+  if (foundTx) {
+    form.value.amount_paid = String(foundTx.total_amount)
+    if (foundTx.date_utang) {
+      form.value.date_paid = foundTx.date_utang
+    }
+    const noteText = foundTx.notes ? `Payment for: ${foundTx.notes}` : `Full payment for utang transaction`
+    form.value.note = noteText
+  }
 })
 
 const selectCustomer = (id: string) => {
@@ -258,7 +306,7 @@ const handleSubmit = async () => {
             </span>
           </div>
 
-          <Select v-model="selectedTransactionId" @update:model-value?="onSelectTransaction">
+          <Select v-model="selectedTransactionId" @update:model-value="onSelectTransaction">
             <SelectTrigger id="tx-history" class="w-full text-xs">
               <SelectValue placeholder="-- Pick a transaction to auto-fill & mark paid --" />
             </SelectTrigger>
@@ -285,7 +333,7 @@ const handleSubmit = async () => {
           >
             <Sparkles class="h-3.5 w-3.5 text-emerald-600 shrink-0" />
             <span>
-              Auto-filled <strong>{{ formatCurrency(Number(form.amount_paid || 0)) }}</strong>. Saving will mark this transaction as <strong>PAID</strong> in Supabase!
+              Auto-filled <strong>{{ formatCurrency(Number(form.amount_paid || 0)) }}</strong> for selected item. Saving will mark this transaction as <strong>PAID</strong>!
             </span>
           </div>
         </div>
@@ -293,7 +341,12 @@ const handleSubmit = async () => {
         <!-- Amount & Date -->
         <div class="space-y-1.5 flex flex-col sm:flex-row gap-3">
           <div class="flex-1 space-y-1.5"> 
-            <Label for="amount">Amount Paid (₱)</Label>
+            <div class="flex items-center justify-between">
+              <Label for="amount">Amount Paid (₱)</Label>
+              <span v-if="form.customer_id && displayedOwedAmount > 0" class="text-[11px] text-emerald-600 dark:text-emerald-400 font-semibold">
+                {{ selectedTransactionId ? 'Tx Amount:' : 'Owed:' }} {{ formatCurrency(displayedOwedAmount) }}
+              </span>
+            </div>
             <Input id="amount" v-model="form.amount_paid" type="number" step="0.01" placeholder="0.00" class="font-mono font-semibold text-sm" />
           </div>
           <div class="flex-1 space-y-1.5">
