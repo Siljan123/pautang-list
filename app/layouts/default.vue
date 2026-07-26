@@ -11,7 +11,19 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 
 const sidebarOpen = ref(true)
+const { initGlobalOrderListener, requestNotificationPermission } = useOrderNotifier()
+
+let cleanup: (() => void) | null = null
+
+onMounted(() => {
+  requestNotificationPermission()
+  cleanup = initGlobalOrderListener()
+})
+
+onUnmounted(() => {
+  cleanup?.()
+})
 </script>

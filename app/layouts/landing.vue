@@ -18,13 +18,16 @@ const mobileMenuOpen = ref(false)
           </div>
           <div class="flex flex-col">
             <span class="font-bold text-lg tracking-tight text-foreground flex items-center gap-1.5">
-              Pautang <span class="text-emerald-600 dark:text-emerald-400">List</span>
+              Shop me pls
             </span>
           </div>
         </NuxtLink>
 
         <!-- Desktop Navigation Links -->
         <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground">
+          <a href="#menu" class="text-orange-500 font-semibold hover:text-orange-600 transition-colors flex items-center gap-1.5">
+            <span>Order Menu</span>
+          </a>
           <a href="#features" class="hover:text-foreground transition-colors">Features</a>
           <a href="#how-it-works" class="hover:text-foreground transition-colors">How It Works</a>
           <a href="#faq" class="hover:text-foreground transition-colors">FAQ</a>
@@ -32,6 +35,12 @@ const mobileMenuOpen = ref(false)
 
         <!-- Desktop Action Buttons -->
         <div class="hidden md:flex items-center gap-3">
+          <a
+            href="#menu"
+            class="text-xs font-bold px-3.5 py-2 rounded-lg bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-md hover:from-orange-600 hover:to-red-600 transition-all"
+          >
+            Order Food
+          </a>
           <NuxtLink
             to="/auth/login"
             class="text-sm font-medium px-4 py-2 rounded-lg text-foreground hover:bg-muted/80 transition-colors"
@@ -58,6 +67,13 @@ const mobileMenuOpen = ref(false)
         class="md:hidden border-b border-border bg-card/95 backdrop-blur-lg px-4 pt-3 pb-6 space-y-4 animate-in slide-in-from-top-2 duration-200"
       >
         <div class="flex flex-col space-y-3 font-medium text-sm">
+          <a
+            href="#menu"
+            @click="mobileMenuOpen = false"
+            class="px-3 py-2 rounded-md bg-orange-500/10 text-orange-500 font-semibold transition-colors"
+          >
+            Order Menu 🍔
+          </a>
           <a
             href="#features"
             @click="mobileMenuOpen = false"

@@ -18,6 +18,7 @@ import { SidebarTrigger } from '@/components/ui/sidebar'
 import { useAuth } from '@/composables/useAuth'
 
 const { user, logout } = useAuth()
+const { playChimeSound, requestNotificationPermission } = useOrderNotifier()
 
 // Search input model
 const searchQuery = ref('')
@@ -82,6 +83,16 @@ function markAllAsRead() {
           <span class="text-[10px]">⌘</span>K
         </kbd>
       </div>
+
+      <!-- Instant Order Notification Chime Test Button -->
+      <button
+        @click="playChimeSound(); requestNotificationPermission()"
+        class="hidden sm:flex items-center gap-1.5 rounded-lg border border-orange-500/30 bg-orange-500/10 px-2.5 py-1.5 text-xs font-bold text-orange-500 hover:bg-orange-500/20 transition-all active:scale-95"
+        title="Test Order Chime Sound & Enable Desktop Notifications"
+      >
+        <Bell class="h-3.5 w-3.5" />
+        <span>Order Notifications ON</span>
+      </button>
     </div>
 
     <!-- Profile -->

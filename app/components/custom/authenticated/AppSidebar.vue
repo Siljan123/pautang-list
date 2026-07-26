@@ -7,9 +7,9 @@ import {
   History,
   Calendar,
   Settings,
-  HelpCircle,
   Wallet,
-  ShieldCheck,
+  ShoppingBag,
+  UtensilsCrossed,
   Bell
 } from 'lucide-vue-next'
 import {
@@ -26,30 +26,32 @@ import {
   SidebarSeparator,
 } from '@/components/ui/sidebar'
 const {count:transactionCount, fetchCount} = useTransactionCount()
+const { pendingCount, fetchOrders } = useFoodOrders()
 
-onMounted ( () =>{
+onMounted(() => {
   fetchCount()
+  fetchOrders()
 })
 const route = useRoute()
 const { user } = useAuth()
 
-const mainItems = computed( () => [
+const mainItems = computed(() => [
   {
     title: 'Dashboard',
     url: '/authenticated/dashboard',
     icon: LayoutDashboard,
   },
-   {
+  {
     title: 'Customers',
     url: '/authenticated/customers',
     icon: Users,
-    badge: transactionCount.value > 0 ? String (transactionCount.value) : undefined
+    badge: transactionCount.value > 0 ? String(transactionCount.value) : undefined
   },
   {
     title: 'Transaction List',
     url: '/authenticated/transactionList',
     icon: Receipt,
-    badge: transactionCount.value > 0 ? String (transactionCount.value) : undefined
+    badge: transactionCount.value > 0 ? String(transactionCount.value) : undefined
   },
   {
     title: 'Payments & History',
@@ -60,6 +62,21 @@ const mainItems = computed( () => [
     title: 'Due Dates',
     url: '/authenticated/dueDates',
     icon: Calendar,
+  },
+])
+
+const shopItems = computed(() => [
+  {
+    title: 'Shop Menu',
+    url: '/authenticated/shopMenu',
+    icon: UtensilsCrossed,
+  },
+  {
+    title: 'Shop Orders',
+    url: '/authenticated/shopOrders',
+    icon: ShoppingBag,
+    badge: pendingCount.value > 0 ? String(pendingCount.value) : undefined,
+    badgeColor: 'bg-orange-500/15 text-orange-500',
   },
 ])
 
@@ -102,6 +119,35 @@ const systemItems = [
                   <component :is="item.icon" class="h-4 w-4 shrink-0" />
                   <span class="truncate">{{ item.title }}</span>
                   <span v-if="item.badge" class="ml-auto flex h-4 min-w-4 items-center justify-center rounded-full bg-primary/15 text-primary text-[10px] font-semibold px-1.5 group-data-[collapsible=icon]:hidden">
+                    {{ item.badge }}
+                  </span>
+                </NuxtLink>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarGroupContent>
+      </SidebarGroup>
+
+      <SidebarSeparator class="my-2" />
+
+      <!-- Shop Group -->
+      <SidebarGroup>
+        <SidebarGroupLabel>Food Shop</SidebarGroupLabel>
+        <SidebarGroupContent>
+          <SidebarMenu>
+            <SidebarMenuItem v-for="item in shopItems" :key="item.title">
+              <SidebarMenuButton
+                :tooltip="item.title"
+                as-child
+                :is-active="route.path === item.url"
+              >
+                <NuxtLink :to="item.url" class="flex items-center gap-2.5">
+                  <component :is="item.icon" class="h-4 w-4 shrink-0" />
+                  <span class="truncate">{{ item.title }}</span>
+                  <span
+                    v-if="item.badge"
+                    :class="['ml-auto flex h-4 min-w-4 items-center justify-center rounded-full text-[10px] font-semibold px-1.5 group-data-[collapsible=icon]:hidden', item.badgeColor ?? 'bg-primary/15 text-primary']"
+                  >
                     {{ item.badge }}
                   </span>
                 </NuxtLink>

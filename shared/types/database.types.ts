@@ -1,4 +1,4 @@
-﻿export type Json =
+export type Json =
   | string
   | number
   | boolean
@@ -122,6 +122,78 @@ export type Database = {
           id?: string
           last_name?: string | null
           middle_name?: string | null
+        }
+        Relationships: []
+      }
+      food_items: {
+        Row: {
+          id: string
+          profile_id: string | null
+          name: string
+          description: string | null
+          price: number
+          category: string | null
+          image_url: string | null
+          is_available: boolean | null
+          created_at: string | null
+        }
+        Insert: {
+          id?: string
+          profile_id?: string | null
+          name: string
+          description?: string | null
+          price?: number
+          category?: string | null
+          image_url?: string | null
+          is_available?: boolean | null
+          created_at?: string | null
+        }
+        Update: {
+          id?: string
+          profile_id?: string | null
+          name?: string
+          description?: string | null
+          price?: number
+          category?: string | null
+          image_url?: string | null
+          is_available?: boolean | null
+          created_at?: string | null
+        }
+        Relationships: []
+      }
+      food_orders: {
+        Row: {
+          id: string
+          profile_id: string | null
+          customer_name: string
+          customer_contact: string | null
+          items: Json
+          total_amount: number
+          status: string | null
+          notes: string | null
+          created_at: string | null
+        }
+        Insert: {
+          id?: string
+          profile_id?: string | null
+          customer_name: string
+          customer_contact?: string | null
+          items: Json
+          total_amount: number
+          status?: string | null
+          notes?: string | null
+          created_at?: string | null
+        }
+        Update: {
+          id?: string
+          profile_id?: string | null
+          customer_name?: string
+          customer_contact?: string | null
+          items?: Json
+          total_amount?: number
+          status?: string | null
+          notes?: string | null
+          created_at?: string | null
         }
         Relationships: []
       }

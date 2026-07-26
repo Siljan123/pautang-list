@@ -6,7 +6,8 @@ import {
   ArrowDownLeft,
   AlertTriangle,
   Receipt,
-  ArrowUpRight
+  ArrowUpRight,
+  ShoppingBag
 } from 'lucide-vue-next'
 import { useTransactions } from '@/composables/useTransactions'
 
@@ -15,9 +16,11 @@ definePageMeta({
 })
 
 const { transactions, loading, fetchTransactions } = useTransactions()
+const { orders, pendingCount, fetchOrders } = useFoodOrders()
 
 onMounted(() => {
   fetchTransactions()
+  fetchOrders()
 })
 
 // Calculate live stats from Supabase transactions
@@ -139,6 +142,21 @@ function formatDate(dateStr: string | null) {
           </div>
         </div>
       </div>
+      <!-- Pending Orders (new) -->
+      <div class="relative overflow-hidden rounded-xl border border-orange-500/20 bg-gradient-to-br from-orange-500/5 to-red-500/5 p-4 shadow-2xs hover:shadow-xs transition-all">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-medium text-muted-foreground">Pending Orders</span>
+          <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-orange-500/10 text-orange-500">
+            <ShoppingBag class="h-4 w-4" />
+          </div>
+        </div>
+        <div class="mt-3">
+          <div class="text-xl font-bold text-foreground">{{ pendingCount }}</div>
+          <div class="mt-1 text-[11px] text-muted-foreground">
+            <span class="text-orange-500 font-semibold">{{ orders.length }} total</span> food orders
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Main Content Grid -->
@@ -241,6 +259,17 @@ function formatDate(dateStr: string | null) {
           <h2 class="text-base font-semibold text-foreground pb-3 border-b border-border">Quick Actions</h2>
           
           <div class="space-y-2.5">
+            <NuxtLink
+              to="/authenticated/shopMenu"
+              class="w-full flex items-center justify-between p-3 rounded-lg border border-border bg-muted/30 hover:bg-orange-500/5 hover:border-orange-500/30 transition-all text-xs font-medium text-foreground group"
+            >
+              <span class="flex items-center gap-2.5">
+                <ShoppingBag class="h-4 w-4 text-orange-500" />
+                Manage Food Shop
+              </span>
+              <ArrowUpRight class="h-4 w-4 text-muted-foreground group-hover:text-orange-500 transition-colors" />
+            </NuxtLink>
+
             <NuxtLink
               to="/authenticated/paymentHistory"
               class="w-full flex items-center justify-between p-3 rounded-lg border border-border bg-muted/30 hover:bg-emerald-500/5 hover:border-emerald-500/30 transition-all text-xs font-medium text-foreground group"
