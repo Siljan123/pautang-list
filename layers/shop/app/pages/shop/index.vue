@@ -4,9 +4,12 @@ import { ShoppingCart, Search, Flame, ChevronDown, Store } from 'lucide-vue-next
 
 definePageMeta({ layout: false })
 
-useHead({
-  title: 'Online Food Shop ',
-  meta: [{ name: 'description', content: 'Browse our delicious menu and order online. Fresh burgers, meals, drinks and more!' }]
+useSeoMeta({
+  title: 'Menu & Ordering - Online Food Shop',
+  ogTitle: 'Menu & Ordering - Online Food Shop',
+  description: 'Browse our delicious menu and order online. Fresh burgers, meals, drinks, desserts and more!',
+  ogDescription: 'Browse our delicious menu and order online. Fresh burgers, meals, drinks, desserts and more!',
+  ogType: 'website'
 })
 
 // --- Data ---

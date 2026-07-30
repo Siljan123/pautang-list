@@ -7,6 +7,14 @@ definePageMeta({
   layout: 'landing'
 })
 
+useSeoMeta({
+  title: 'Online Food Shop - Order Fresh Meals & Snacks',
+  ogTitle: 'Online Food Shop - Order Fresh Meals & Snacks',
+  description: 'Order your favorite burgers, meals, snacks, and drinks online. Freshly prepared and delivered fast!',
+  ogDescription: 'Order your favorite burgers, meals, snacks, and drinks online. Freshly prepared and delivered fast!',
+  ogType: 'website'
+})
+
 // --- Food Menu Data ---
 const { items, loading, fetchFoodItems } = useFoodItems()
 const ownerId = ref<string>('')
