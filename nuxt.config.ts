@@ -2,7 +2,27 @@ import { defineNuxtConfig } from "nuxt/config";
 
 export default defineNuxtConfig({
   extends: ['./layers/shop'],
-  modules: ['@nuxtjs/supabase', '@nuxtjs/tailwindcss', 'shadcn-nuxt'],
+  modules: ['@nuxtjs/supabase', '@nuxtjs/tailwindcss', 'shadcn-nuxt','@nuxtjs/robots','@nuxtjs/sitemap'],
+   ssr: true,
+   site: {
+    url: 'https://inventoryitem.shop/', // required, no trailing slash
+    name: 'Shop me pls'
+  },
+    sitemap: {
+    // auto-detects your pages/ routes by default, no extra config needed for static routes
+  },
+
+  robots: {
+    // default already allows all crawlers — override only if you need to block something
+  },
+  app: {
+  head: {
+    link: [
+      { rel: 'icon', type: 'image/png', href: '/favicon.png' },
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+    ]
+  }
+},
   shadcn: {
     /**
      * Prefix for all the imported component.
