@@ -12,7 +12,26 @@ useSeoMeta({
   ogTitle: 'Online Food Shop - Order Fresh Meals & Snacks',
   description: 'Order your favorite burgers, meals, snacks, and drinks online. Freshly prepared and delivered fast!',
   ogDescription: 'Order your favorite burgers, meals, snacks, and drinks online. Freshly prepared and delivered fast!',
-  ogType: 'website'
+  ogType: 'website',
+  ogUrl: 'https://inventoryitem.shop'
+})
+
+useHead({
+  link: [
+    { rel: 'canonical', href: 'https://inventoryitem.shop' }
+  ],
+  script: [
+    {
+      type: 'application/ld+json',
+      children: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        'name': 'Online Food Shop',
+        'url': 'https://inventoryitem.shop',
+        'description': 'Order your favorite burgers, meals, snacks, and drinks online.'
+      })
+    }
+  ]
 })
 
 // --- Food Menu Data ---

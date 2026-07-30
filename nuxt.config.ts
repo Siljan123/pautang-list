@@ -95,7 +95,10 @@ export default defineNuxtConfig({
     },
   },
   nitro: {
-    preset: 'cloudflare_module'
+    preset: 'cloudflare_module',
+    prerender: {
+      routes: ['/sitemap.xml', '/robots.txt']
+    }
   },
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true }
