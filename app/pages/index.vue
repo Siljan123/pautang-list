@@ -8,12 +8,13 @@ definePageMeta({
 })
 
 useSeoMeta({
-  title: 'Online Food Shop - Order Fresh Meals & Snacks',
+  title: 'Order Fresh Meals & Snacks Online',
   ogTitle: 'Online Food Shop - Order Fresh Meals & Snacks',
   description: 'Order your favorite burgers, meals, snacks, and drinks online. Freshly prepared and delivered fast!',
   ogDescription: 'Order your favorite burgers, meals, snacks, and drinks online. Freshly prepared and delivered fast!',
   ogType: 'website',
-  ogUrl: 'https://inventoryitem.shop'
+  ogUrl: 'https://inventoryitem.shop',
+  twitterCard: 'summary_large_image'
 })
 
 useHead({

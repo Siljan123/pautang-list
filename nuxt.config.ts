@@ -23,7 +23,8 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      title: 'Online Food Shop - Order Delicious Food Online',
+      title: 'Order Delicious Food Online',
+      titleTemplate: '%s | Online Food Shop',
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },

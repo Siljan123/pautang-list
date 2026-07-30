@@ -8,14 +8,18 @@ import {
   ShieldCheck,
   Loader2,
   AlertCircle,
-  Wallet,
   ArrowRight,
-  TrendingUp,
-  Receipt,
-  CheckCircle2
 } from 'lucide-vue-next'
 
 definePageMeta({ layout: 'guest' })
+
+useSeoMeta({
+  title: 'Merchant Login',
+  ogTitle: 'Merchant Login - Online Food Shop',
+  description: 'Sign in to access your merchant dashboard, manage menu items, and track orders.',
+  ogDescription: 'Sign in to access your merchant dashboard, manage menu items, and track orders.',
+  robots: 'noindex, nofollow'
+})
 
 const { login, loading, errorMsg } = useAuth()
 

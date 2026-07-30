@@ -45,6 +45,11 @@ definePageMeta({
   layout: 'default',
 })
 
+useSeoMeta({
+  title: 'Customer Management',
+  robots: 'noindex, nofollow'
+})
+
 const { customers, loading, fetchCustomers } = useCustomers()
 
 const searchQuery = ref('')

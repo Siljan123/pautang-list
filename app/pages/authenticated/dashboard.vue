@@ -15,6 +15,11 @@ definePageMeta({
   layout: 'default'
 })
 
+useSeoMeta({
+  title: 'Dashboard',
+  robots: 'noindex, nofollow'
+})
+
 const { transactions, loading, fetchTransactions } = useTransactions()
 const { orders, pendingCount, fetchOrders } = useFoodOrders()
 
