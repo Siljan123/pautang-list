@@ -35,6 +35,7 @@ const categories = ['Burgers', 'Meals', 'Drinks', 'Snacks', 'Desserts', 'Others'
 
 const imageFile = ref<File | null>(null)
 const imagePreview = ref<string>('')
+const imgInput = ref<HTMLInputElement | null>(null)
 const uploading = ref(false)
 const saving = ref(false)
 const errorMsg = ref('')
@@ -256,12 +257,13 @@ const categoryEmoji: Record<string, string> = {
   </div>
 
   <!-- Add / Edit Modal -->
-  <Transition name="backdrop">
-    <div v-if="modalOpen" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm" @click="modalOpen = false" />
-  </Transition>
   <Transition name="modal">
-    <div v-if="modalOpen" class="fixed inset-0 z-60 flex items-center justify-center p-4">
-      <div class="relative w-full max-w-lg rounded-2xl border border-border bg-card shadow-2xl overflow-hidden" @click.stop>
+    <div
+      v-if="modalOpen"
+      class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+      @click.self="modalOpen = false"
+    >
+      <div class="relative w-full max-w-lg rounded-2xl border border-border bg-card shadow-2xl overflow-hidden">
         <!-- Modal header -->
         <div class="flex items-center justify-between border-b border-border px-6 py-4">
           <h2 class="font-bold text-foreground">{{ editingItem ? 'Edit Food Item' : 'Add Food Item' }}</h2>
@@ -278,7 +280,7 @@ const categoryEmoji: Record<string, string> = {
               class="relative flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-border bg-muted/20 hover:border-orange-500/50 hover:bg-orange-500/5 transition-all cursor-pointer overflow-hidden h-40 w-40 shrink-0 shadow-xs"
               @dragover.prevent
               @drop.prevent="handleDrop"
-              @click="($refs.imgInput as HTMLInputElement)?.click()"
+              @click="imgInput?.click()"
             >
               <img
                 v-if="imagePreview"

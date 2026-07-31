@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import type { CartItem } from '~/composables/useFoodOrders'
 import { X, User, Phone, MessageSquare, CheckCircle2, Loader2 } from 'lucide-vue-next'
 
 const props = defineProps<{
@@ -82,7 +81,7 @@ async function submitOrder() {
       v-if="open"
       class="fixed inset-0 z-[120] flex items-center justify-center p-4"
     >
-      <div class="relative w-full max-w-md rounded-2xl border border-border bg-card text-foreground shadow-2xl overflow-hidden">
+      <div class="relative w-full max-w-md rounded-xl border border-border bg-card text-foreground shadow-2xl overflow-hidden">
 
         <!-- Success State -->
         <Transition name="fade">
@@ -127,9 +126,9 @@ async function submitOrder() {
         </div>
 
         <!-- Form -->
-        <div class="px-6 py-5 space-y-4">
+        <div class="px-6 py-5 space-y-8">
           <div>
-            <label class="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+            <label class="text-xs mt-4 font-semibold text-muted-foreground uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
               <User class="h-3 w-3" /> Your Name <span class="text-red-500">*</span>
             </label>
             <input
@@ -169,7 +168,7 @@ async function submitOrder() {
           <button
             @click="submitOrder"
             :disabled="submitting"
-            class="w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-orange-500 to-red-500 py-3 text-sm font-bold text-white shadow-lg hover:shadow-orange-500/30 hover:from-orange-400 hover:to-red-400 disabled:opacity-60 disabled:cursor-not-allowed active:scale-95 transition-all duration-150"
+            class="w-full flex items-center mb-4 justify-center gap-2 rounded-xl bg-gradient-to-r from-orange-500 to-red-500 py-3 text-sm font-bold text-white shadow-lg hover:shadow-orange-500/30 hover:from-orange-400 hover:to-red-400 disabled:opacity-60 disabled:cursor-not-allowed active:scale-95 transition-all duration-150"
           >
             <Loader2 v-if="submitting" class="h-4 w-4 animate-spin" />
             <span>{{ submitting ? 'Placing Order...' : 'Place Order' }}</span>

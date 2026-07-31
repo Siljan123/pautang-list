@@ -99,9 +99,6 @@ function onOrderPlaced() {
     <!-- Decorative background glow blobs -->
     <div class="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-gradient-to-tr from-emerald-500/15 via-orange-500/10 to-amber-500/5 blur-3xl opacity-70 dark:opacity-40" />
 
-    <LandingHero />
-    
-    <!-- Food List Ordering Section -->
     <LandingFoodMenu
       :items="items"
       :loading="loading"
@@ -110,18 +107,16 @@ function onOrderPlaced() {
       @open-cart="cartOpen = true"
     />
 
-    <LandingShowcase />
     <LandingFeatures />
     <LandingHowItWorks />
     <LandingFaq />
-    <LandingCta />
     <LandingFooter />
 
     <!-- Floating Cart Button -->
     <Transition name="fab">
-      <button
-        v-if="cartCount > 0"
-        id="landing-cart-fab"
+  <button
+    v-if="cartCount > 0 && !cartOpen"
+    id="landing-cart-fab"
         @click="cartOpen = true"
         class="fixed bottom-6 right-6 z-40 flex items-center gap-2.5 rounded-full bg-gradient-to-r from-orange-500 to-red-500 px-5 py-3 text-sm font-bold text-white shadow-2xl shadow-orange-500/50 hover:scale-105 active:scale-95 transition-all duration-200"
       >

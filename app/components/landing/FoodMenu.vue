@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { Search, Flame, ShoppingCart } from 'lucide-vue-next'
-import type { FoodItem } from '@/composables/useFoodItems'
 
 const props = defineProps<{
   items: FoodItem[]
@@ -37,8 +36,8 @@ const filteredItems = computed(() => {
 })
 
 const categoryEmoji: Record<string, string> = {
-  Burgers: '🍔', Drinks: '🥤', Snacks: '🍟', Meals: '🍱',
-  Desserts: '🍨', Others: '🍽️', All: '✨'
+  Burgers: '', Drinks: '', Snacks: '', Meals: '',
+  Desserts: '', Others: '', All: ''
 }
 </script>
 
@@ -46,20 +45,15 @@ const categoryEmoji: Record<string, string> = {
   <section id="menu" class="relative py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-border/40">
     <!-- Header -->
     <div class="text-center max-w-3xl mx-auto mb-10">
-      <div class="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-1.5 text-xs font-semibold text-orange-600 dark:text-orange-400 mb-4">
-        <Flame class="h-4 w-4 text-orange-500 animate-bounce" />
-        <span>Fresh & Hot Menu</span>
-      </div>
       <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-foreground">
         Order Your Favorite <span class="bg-gradient-to-r from-orange-500 via-amber-500 to-red-500 bg-clip-text text-transparent">Food & Treats</span>
       </h2>
       <p class="mt-4 text-base sm:text-lg text-muted-foreground">
         Browse our delicious menu, add items to your cart, and place an order instantly right here!
       </p>
-
       <!-- Search Input -->
       <div class="mt-8 relative max-w-md mx-auto">
-        <Search class="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+        <Search class="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground z-10" />
         <input
           v-model="searchQuery"
           type="text"
@@ -68,8 +62,6 @@ const categoryEmoji: Record<string, string> = {
         />
       </div>
     </div>
-
-    <!-- Category Filter Pills -->
     <div class="flex gap-2 overflow-x-auto pb-4 mb-8 justify-start sm:justify-center scrollbar-hide">
       <button
         v-for="cat in allCategories"
